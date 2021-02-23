@@ -1,1 +1,3 @@
-# KhachKara-jseditor_ui-
+# jseditor_ui
+
+jseditor qml version

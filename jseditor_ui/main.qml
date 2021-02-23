@@ -30,6 +30,23 @@ Window {
         height: root.height * 0.05
         font.pixelSize: height * 0.5
         placeholderText: "ввод данных"
+
+        TextInput{
+            id: inputDatatxt
+            width: parent
+            leftPadding: margin
+            height: parent
+            font.pixelSize: txtinput.font.pixelSize
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                txtinput.placeholderText = ""
+                inputDatatxt.focus = true
+            }
+        }
     }
     Row{
         spacing: margin
@@ -39,37 +56,75 @@ Window {
             id: jsonCode
             width: root.width * 0.35
             height: root.height* 0.85
-            color: "yellow"
             border.width: margin / 5
             border.color: bdrColor
-            TextArea{
-                width: parent
-                height: parent
-                text: "json file"
-                font.pointSize: txtinput.font.pointSize
+            ScrollView{
+                width: parent.width
+                height: parent.height
                 clip: true
+                TextArea{
+                    id: jsnTextArea
+                    width: root.width * 0.35
+                    height: root.height* 0.85
+                    placeholderText: "json file"
+                    font.pointSize: txtinput.font.pointSize
+                    clip: true
+                    TextInput{
+                        id: jsnDatatxt
+                        width: parent
+                        leftPadding: margin
+                        height: parent
+                        font.pixelSize: jsnTextArea.font.pixelSize
+                    }
+
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            jsnTextArea.placeholderText = ""
+                            jsnDatatxt.focus = true
+                        }
+                    }
+                }
             }
         }
         Rectangle{
             id: jsonOutput
             width: root.width * 0.35
             height: root.height * 0.85
-            color: "purple"
             border.width: margin / 5
             border.color: bdrColor
-            TextArea{
-                width: parent
-                height: parent
-                text: "output file"
-                font.pointSize: txtinput.font.pointSize
+            ScrollView{
+                width: parent.width
+                height: parent.height
                 clip: true
+                TextArea{
+                    id: jsonOutputtxtArea
+                    width: parent
+                    height: parent
+                    font.pointSize: txtinput.font.pointSize
+                    placeholderText: "output file"
+                    clip: true
+                    TextInput{
+                        id: jsonOutputtxt
+                        width: parent
+                        leftPadding: margin
+                        height: parent
+                        font.pixelSize: jsonOutputtxtArea.font.pixelSize
+                    }
+                    MouseArea{
+                        anchors.fill: jsonOutputtxtArea
+                        onClicked: {
+                            jsonOutputtxtArea.placeholderText = ""
+                            jsonOutputtxt.focus = true
+                        }
+                    }
+                }
             }
         }
         Rectangle{
             id: tools
             width: txtinput.width - x
             height: root.height* 0.85
-            color: "cyan"
             border.width: margin / 5
             border.color: bdrColor
             Column{
@@ -82,7 +137,7 @@ Window {
                         height: tools.height * 0.05
                         x: x + margin
                         y: y + margin
-                        border.color: "black"
+                        border.color: bdrColor
                         border.width: 1
                         Text {
                             anchors.centerIn: parent
@@ -96,13 +151,20 @@ Window {
                         y: margin
                         width: tools.width - x - margin
                         height: tools.height * 0.05
-                        border.color: "black"
+                        border.color: bdrColor
                         border.width: 1
                         TextInput{
                             id: keyInputTxt
                             anchors.centerIn: parent
                             font.pointSize: 12
                             text: "key input"
+                        }
+                        MouseArea{
+                            anchors.fill: keyInputTxt
+                            onClicked: {
+                                keyInputTxt.text = ""
+                                keyInputTxt.focus = true
+                            }
                         }
                     }
                 }
@@ -114,7 +176,7 @@ Window {
                         height: tools.height * 0.05
                         x: x + margin
                         y: y + margin
-                        border.color: "black"
+                        border.color: bdrColor
                         border.width: 1
                         Text {
                             anchors.centerIn: parent
@@ -128,13 +190,20 @@ Window {
                         y: margin
                         width: tools.width - x - margin
                         height: tools.height * 0.05
-                        border.color: "black"
+                        border.color: bdrColor
                         border.width: 1
                         TextInput{
                             id: valueInputTxt
                             anchors.centerIn: parent
                             font.pointSize: 12
                             text: "value input"
+                        }
+                        MouseArea{
+                            anchors.fill: valueInputTxt
+                            onClicked: {
+                                valueInputTxt.text = ""
+                                valueInputTxt.focus = true
+                            }
                         }
                     }
                 }
@@ -147,7 +216,7 @@ Window {
                         height: tools.height * 0.05
                         x: x + margin
                         y: y + margin
-                        border.color: "black"
+                        border.color: bdrColor
                         border.width: 1
                         Text {
                             anchors.centerIn: parent
@@ -162,7 +231,7 @@ Window {
                         y: margin
                         width: tools.width - x - margin
                         height: tools.height * 0.05
-                        border.color: "black"
+                        border.color: bdrColor
                         border.width: 1
                         Rectangle {
                             id:comboBox
@@ -193,7 +262,6 @@ Window {
                                 }
                             }
 
-
                             Rectangle {
                                 id:dropDown
                                 width:comboBox.width
@@ -217,7 +285,6 @@ Window {
                                             anchors.left: parent.left
                                             anchors.margins: 5
                                             font.pointSize: 14
-
                                         }
                                         MouseArea {
                                             anchors.fill: parent;
@@ -244,7 +311,7 @@ Window {
                 Rectangle{
                     id: buttonId
                     x: keyRow.x + margin
-                    y: typeRect.y + 300
+                    y: typeRect.y
                     z: -1
 
                     width: tools.width - 2 * margin
@@ -265,10 +332,11 @@ Window {
     }
 
     Rectangle{
+        border.width: 1
+        border.color: bdrColor
         x: margin
         y: jsonCode.y + jsonCode.height + 8 * margin
         width: root.width - 2 * margin
         height: root.height - y - margin
-        color: "blue"
     }
 }
