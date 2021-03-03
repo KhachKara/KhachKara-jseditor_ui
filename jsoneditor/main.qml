@@ -208,7 +208,7 @@ Window {
                             anchors.centerIn: parent
                             width: parent.width - 2 * borderWidth
                             height: parent.height - 2 * borderWidth
-                            editable: true
+                            editable: false
                             font.pointSize: fontPointSize
                             model: ListModel {
                                 id: model
