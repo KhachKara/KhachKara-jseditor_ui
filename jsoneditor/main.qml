@@ -6,285 +6,122 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
 
-
 Window {
     id: root
     property string projectName: "JsonEditor"
-    minimumWidth: Screen.desktopAvailableWidth * 0.4
-    minimumHeight: Screen.desktopAvailableHeight * 0.5
-    maximumWidth: Screen.desktopAvailableWidth  * 0.6
-    maximumHeight: Screen.desktopAvailableHeight * 0.75
+    width: 1000
+    height: 600
     color: "#d9d9d9"
     visible: true
     title: qsTr(projectName)
 
-    Row{
-        id: rowBtns
-        Button {
-            id: btnOpen
-            flat: true
-            width: root.width * 0.06515
-            height: root.height * 0.0385
-            text: qsTr("open")
-            onClicked: {
-                console.log(minimumWidth)
-                console.log(minimumHeight)
-                console.log(width)
-                console.log(height)
+    // строка меню
+    property variant menuItems: ["Open", "Save", "Close", "Auto", "Synchronise"]
+    property int borderWidth: 1
+    property int space: 10
+    Item {
+        id: item1
+        width: rowMenu.width
+        height: rowMenu.height
 
+        Row{
+            spacing: space
+            id: rowMenu
+            x: space
+            y: space
+            Repeater{
+                model: menuItems.length
+                Rectangle{
+                    width: menuTxt.width
+                    height: menuTxt.height
+                    border.width: borderWidth
+                    border.color: "black"
+                    Button{
+                        width: menuTxt.width  - 2 * borderWidth
+                        height: menuTxt.height - 2 * borderWidth
+                        anchors.centerIn: parent
+                        Text {
+                            id: menuTxt
+                            padding: space
+                            anchors.centerIn: parent
+                            text: menuItems[index]
+                            font.pointSize: 12
+                        }
+                        onClicked:
+                        {
+                            console.log(menuTxt.text)
+                        }
+                    }
+                }
             }
-        }
-        Button {
-            id: btnSave
-            flat: true
-            width: root.width * 0.06515
-            height: root.height * 0.0385
-            text: qsTr("save")
-            //            onClicked: {
-            //            }
-        }
-        Button {
-            id: btnClose
-            flat: true
-            width: root.width * 0.06515
-            height: root.height * 0.0385
-            text: qsTr("close")
-            //            onClicked: {
-            //            }
-        }
-        Button {
-            id: btnAuto
-            flat: true
-            width: root.width * 0.06515
-            height: root.height * 0.0385
-            text: qsTr("Auto")
-            //            onClicked: {
-            //            }
-        }
-        Button {
-            id: btnsynch
-            flat: true
-            width: root.width * 0.06515
-            height: root.height * 0.0385
-            text: qsTr("synch")
-            //            onClicked: {
-            //            }
         }
     }
-    Row{
-        spacing: 0
-        anchors.top: rowBtns.bottom
+
+    // блок ввода jsom
+    Item {
+        id: item2
+        width: item1.width
+        height: root.height - item1.height
         Rectangle{
-            id: jsInput
-            width: root.width * 0.35
-            height: root.height - rowBtns.y - rowBtns.height
-            border.width: 1
-            border.color: "#e5e5e5"
-            ScrollView{
-                anchors.fill: parent
-                TextArea{
-                    width: parent
-                    height: parent
-                    padding: root.width * 0.01
-                    focus: true
-                    clip: false
-                    font.pixelSize: root.width * 0.02
-                }
-            }
+            id: item2Rect
+            x: item1.x + space
+            y: item1.y + item1.height + 2 * space
+            width: item1.width
+            height: root.height - item1.height - 3 * space
+            border.color: "black"
+            border.width: borderWidth
+            color: "yellow"
         }
+    }
 
+    // блок вывода json
+    Item {
+        id: item3
+        width: item2.width
+        height: root.height - item1.height
         Rectangle{
-            id: jsOutput
-            width: root.width * 0.35
-            height: root.height - rowBtns.y - rowBtns.height
-            border.width: 1
-            border.color: "#e5e5e5"
-            ScrollView{
-                anchors.fill: parent
-                TextArea{
-                    width: parent
-                    height: parent
-                    padding: root.width * 0.01
-                    focus: true
-                    clip: false
-                    font.pixelSize: root.width * 0.02
-                }
-            }
+            id: item3Rect
+            x: item1.x + item1.width + 2 * space
+            y: item1.y + item1.height + 2 * space
+            width: item1.width
+            height: root.height - item1.height - 3 * space
+            border.color: "black"
+            border.width: borderWidth
+            color: "cyan"
         }
+    }
 
-        // managment tools
+    // блок управления
+    Item {
+        id: item4
+        width: root.width - item2Rect.width - item3Rect.width - 4 * space
+        height: 180
         Rectangle{
-            id: managmentRect
-            width: root.width - jsInput.width - jsOutput.width
-            height: root.height - rowBtns.y
-            Column{
-                spacing: -1
-                id: clmn
+            id: item4Rect
+            x: item2.x + item2.width + item3.x + item3.width + 3 * space
+            y: item1.y + item1.height + 2 * space
+            width: item4.width
+            height: item4.height
+            border.color: "black"
+            border.width: borderWidth
+            color: "blue"
+        }
+    }
 
-                // key
-                Row{
-                    width: keyRect.width + volueRect.width
-                    height: keyRect.height
-                    Rectangle{
-                        id: keyRect
-                        width: keyTxt.width + keyTxt.font.pixelSize
-                        height: keyTxt.height + keyTxt.font.pixelSize
-                        border.width: 1
-                        border.color: "#e5e5e5"
-                        Text {
-                            id: keyTxt
-                            anchors.centerIn: parent
-                            font.pointSize: root.width * 0.02
-                            text: "key"
-                        }
-                    }
-                    Rectangle{
-                        id: volueRect
-                        width: managmentRect.width - keyRect.width
-                        height: keyRect.height
-                        border.width: 1
-                        border.color: "#e5e5e5"
-                        anchors.left: keyRect.right
-                        anchors.top: keyRect.top
-                        FocusScope {
-                            anchors.fill: parent
-                            TextField{
-                                id: volueTxt
-                                focus: true
-                                width: volueRect.width
-                                height: volueRect.height
-                                font.pixelSize: root.width * 0.02
-                            }
-                        }
-                    }
-                }
-
-                // type
-                Row{
-                    width: typeRect.width + typevalueRect.width
-                    height: typeRect.height
-                    Rectangle{
-                        id: typeRect
-                        width: keyTxt.width + keyTxt.font.pixelSize
-                        height: keyTxt.height + keyTxt.font.pixelSize
-                        border.width: 1
-                        border.color: "#e5e5e5"
-                        Text {
-                            id: typeyTxt
-                            anchors.centerIn: parent
-                            font.pointSize: root.width * 0.015
-                            text: "type"
-                        }
-                    }
-                    Rectangle{
-                        id: typevalueRect
-                        width: managmentRect.width - keyRect.width
-                        height: keyRect.height
-                        border.width: 1
-                        border.color: "#e5e5e5"
-                        anchors.left: typeRect.right
-                        anchors.top: typeRect.top
-                        ComboBox {
-                            width: parent.width
-                            height: parent.height
-                            editable: true
-                            font.pixelSize: root.width * 0.02
-                            model: ListModel {
-                                id: model
-                                ListElement { text: "int" }
-                                ListElement { text: "double" }
-                                ListElement { text: "string" }
-                                ListElement { text: "bool" }
-                            }
-                            onAccepted: {
-                                if (find(editText) === -1)
-                                    model.append({text: editText})
-                            }
-                        }
-                    }
-                }
-
-                // value
-                Row{
-                    width: keyRect.width + volueRect.width
-                    height: keyRect.height
-                    Rectangle{
-                        id: valueRect
-                        width: keyTxt.width + keyTxt.font.pixelSize
-                        height: keyTxt.height + keyTxt.font.pixelSize
-                        border.width: 1
-                        border.color: "#e5e5e5"
-                        Text {
-                            id: valueValueTxt
-                            anchors.centerIn: parent
-                            font.pointSize: root.width * 0.02
-                            text: "value"
-                        }
-                    }
-                    Rectangle{
-                        id: volueValueRect
-                        width: managmentRect.width - keyRect.width
-                        height: keyRect.height
-                        border.width: 1
-                        border.color: "#e5e5e5"
-                        anchors.left: keyRect.right
-                        anchors.top: keyRect.top
-                        FocusScope {
-                            anchors.fill: parent
-                            TextField{
-                                id: volueValueTxt
-                                focus: true
-                                width: volueRect.width
-                                height: volueRect.height
-                                font.pixelSize: root.width * 0.015
-                            }
-                        }
-                    }
-                }
-
-                // btn edit
-                Row{
-                    Rectangle{
-                        id: editBtnRect
-                        width: managmentRect.width
-                        height: 40
-                        Button {
-                            id: btnEdit
-                            width: parent.width
-                            height: parent.height
-                            font.pointSize: root.width * 0.015
-                            text: "edit"
-                            //            onClicked: {
-                            //            }
-                        }
-                    }
-                }
-
-                // btns apply save
-                Rectangle{
-                    id: aplSave
-                    width: managmentRect.width
-                    height: 20
-                    x: editBtnRect.x
-                    Row{
-                        Button{
-                            width: aplSave.width / 2
-                            font.pointSize: root.width * 0.015
-                            text: "Apply"
-                            //            onClicked: {
-                            //            }
-                        }
-                        Button{
-                            width: aplSave.width / 2
-                            font.pointSize: root.width * 0.015
-                            text: "Save"
-                            //            onClicked: {
-                            //            }
-                        }
-                    }
-                }
-
-            }
+    // блок потомки родственники
+    Item {
+        id: item5
+        width: root.width - item2Rect.width - item3Rect.width - 4 * space
+        height: 120
+        Rectangle{
+            id: item5Rect
+            x: item2.x + item2.width + item3.x + item3.width + 3 * space
+            y: root.height - height - space
+            width: item5.width
+            height: item5.height
+            border.color: "black"
+            border.width: borderWidth
+            color: "green"
         }
     }
 }
