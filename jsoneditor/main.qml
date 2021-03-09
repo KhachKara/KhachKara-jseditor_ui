@@ -13,7 +13,7 @@ Window {
     property string textAreaColor: "#e9e9e9"
     property variant validTypes: ["int", "string", "double", "bool", "undefined"]
 
-    width: 1000
+    width: 1000 + 4 * space
     height: 600
     color: "#d9d9d9"
     visible: true
@@ -27,7 +27,7 @@ Window {
     // строка меню
     Item {
         id: item1
-        width: rowMenu.width
+        width: (root.width - 200) * 1 / 2
         height: rowMenu.height
 
         Row{
@@ -75,7 +75,7 @@ Window {
             id: item2Rect
             x: item1.x + space
             y: item1.y + item1.height + 2 * space
-            width: item1.width
+            width: parent.width
             height: root.height - item1.height - 3 * space
             border.color: "black"
             border.width: borderWidth
@@ -129,16 +129,14 @@ Window {
     // блок управления
     Item {
         id: item4
-        width: root.width - item2Rect.width - item3Rect.width - 4 * space
+        width: 200 - 4 * space
         height: 180
         Rectangle{
             id: item4Rect
-            x: item2.x + item2.width + item3.x + item3.width + 3 * space
+            x: item2.width + item3.width + 3 * space
             y: item1.y + item1.height + 2 * space
             width: item4.width
             height: item4.height
-            //            border.color: "black"
-            //            border.width: borderWidth
             color: root.color
             Column{
                 spacing: - borderWidth
@@ -269,7 +267,7 @@ Window {
     // блок потомки родственники
     Item {
         id: item5
-        width: root.width - item2Rect.width - item3Rect.width - 4 * space
+        width: 200 - 4 * space
         height: 60
         Rectangle{
             id: item5Rect
@@ -281,6 +279,7 @@ Window {
             border.width: borderWidth
             color: "green"
             Row{
+                width: item5.width
                 Rectangle{
                     width: item5Rect.width / 2
                     height: item5Rect.height
