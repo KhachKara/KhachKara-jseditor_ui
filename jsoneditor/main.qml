@@ -5,7 +5,6 @@ import QtQml.Models 2.3
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
-
 Window {
     id: root
     property string projectName: "JsonEditor"
@@ -13,12 +12,11 @@ Window {
     property string textAreaColor: "#e9e9e9"
     property variant validTypes: ["int", "string", "double", "bool", "undefined"]
 
-    width: 1000 + 4 * space
+    width: 1000
     height: 600
     color: "#d9d9d9"
     visible: true
     title: qsTr(projectName)
-
 
     property variant menuItems: ["Open", "Save", "Close", "Auto", "Synchronise"]
     property int borderWidth: 1
@@ -27,14 +25,16 @@ Window {
     // строка меню
     Item {
         id: item1
-        width: (root.width - 200) * 1 / 2
+        width: root.width / 2
         height: rowMenu.height
 
         Row{
             spacing: space
             id: rowMenu
-            x: space
-            y: space
+
+            leftPadding: space
+            topPadding: space
+
             Repeater{
                 model: menuItems.length
                 Rectangle{
@@ -69,14 +69,17 @@ Window {
     // блок ввода jsom
     Item {
         id: item2
-        width: item1.width
-        height: root.height - item1.height
+        width: (root.width - item4.width - 4 * space) / 2
+        height: root.height - item1.height - 2 * space
+        anchors.top: item1.bottom
+        anchors.topMargin: space
+        anchors.left: item1.left
+        anchors.leftMargin: space
         Rectangle{
             id: item2Rect
-            x: item1.x + space
-            y: item1.y + item1.height + 2 * space
+
             width: parent.width
-            height: root.height - item1.height - 3 * space
+            height: item2.height
             border.color: "black"
             border.width: borderWidth
             color: textAreaColor
@@ -100,13 +103,16 @@ Window {
     Item {
         id: item3
         width: item2.width
-        height: root.height - item1.height
+        height: item2.height
+
+        anchors.top: item2.top
+        anchors.left: item2.right
+        anchors.leftMargin: space
+
         Rectangle{
             id: item3Rect
-            x: item1.x + item1.width + 2 * space
-            y: item1.y + item1.height + 2 * space
-            width: item1.width
-            height: root.height - item1.height - 3 * space
+            width: item2.width
+            height: parent.height
             border.color: "black"
             border.width: borderWidth
             color: textAreaColor
@@ -129,12 +135,16 @@ Window {
     // блок управления
     Item {
         id: item4
-        width: 200 - 4 * space
+        width: 250
         height: 180
+
+        anchors.top: item3.top
+        anchors.left: item3.right
+        anchors.leftMargin: space
+
         Rectangle{
             id: item4Rect
-            x: item2.width + item3.width + 3 * space
-            y: item1.y + item1.height + 2 * space
+
             width: item4.width
             height: item4.height
             color: root.color
@@ -267,12 +277,16 @@ Window {
     // блок потомки родственники
     Item {
         id: item5
-        width: 200 - 4 * space
+
+        anchors.left: item3.right
+        anchors.leftMargin: space
+        anchors.bottom: item3.bottom
+
+        width: item4.width
         height: 60
         Rectangle{
             id: item5Rect
-            x: item2.x + item2.width + item3.x + item3.width + 3 * space
-            y: root.height - height - space
+
             width: item5.width
             height: item5.height
             border.color: "black"
