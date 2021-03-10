@@ -274,6 +274,21 @@ Window {
         }
     }
 
+    Item {
+        id: logo
+        width: item4.width
+        height: 100
+        anchors.top: item4.bottom
+        anchors.topMargin: 100
+        anchors.left: item4.left
+        anchors.leftMargin: width / 4
+        Image {
+            id: name
+            source: "images/jsoneditor_logo.svg"
+            scale: 2
+        }
+    }
+
     // блок потомки родственники
     Item {
         id: item5
