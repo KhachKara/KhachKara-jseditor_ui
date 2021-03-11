@@ -311,13 +311,12 @@ Window {
                 Rectangle{
                     width: item5Rect.width / 2
                     height: item5Rect.height
-                    border.color: "black"
-                    border.width: borderWidth
+
                     Button{
                         id: addChild
                         anchors.centerIn: parent
-                        width: parent.width - 2 * borderWidth
-                        height: parent.height - 2 * borderWidth
+                        width: parent.width
+                        height: parent.height
                         text: "Add Child"
                         font.pointSize: fontPointSize
 
@@ -326,6 +325,8 @@ Window {
                             implicitHeight: 40
                             opacity: enabled ? 1 : 0.3
                             color: addChild.down ? "#d0d0d0" : "#e0e0e0"
+                            border.color: "black"
+                            border.width: borderWidth
                         }
 
                         onClicked:
@@ -338,21 +339,22 @@ Window {
 
                     width: parent.width / 2
                     height: parent.height
-                    border.color: "black"
-                    border.width: borderWidth
+
                     Button{
-                        id: chSimb
+                        id: chSibl
                         anchors.centerIn: parent
-                        width: parent.width - 2 * borderWidth
-                        height: parent.height - 2 * borderWidth
-                        text: "Add Sibblings"
+                        width: parent.width
+                        height: parent.height
+                        text: "Add Siblings"
                         font.pointSize: fontPointSize
 
                         background: Rectangle {
                             implicitWidth: 100
                             implicitHeight: 40
                             opacity: enabled ? 1 : 0.3
-                            color: chSimb.down ? "#d0d0d0" : "#e0e0e0"
+                            color: chSibl.down ? "#d0d0d0" : "#e0e0e0"
+                            border.color: "black"
+                            border.width: borderWidth
                         }
 
                         onClicked:
