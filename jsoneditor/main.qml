@@ -10,7 +10,6 @@ Window {
     property string projectName: "Json Editor"
     property int fontPointSize: 12
     property string textAreaColor: "#e9e9e9"
-    property variant validTypes: ["int", "string", "double", "bool", "undefined"]
 
     width: 1000
     height: 600
@@ -289,7 +288,7 @@ Window {
     }
 
     // блок потомки родственники
-    Item {
+    ButtonBlock {
         id: item5
 
         anchors.left: item3.right
@@ -299,53 +298,13 @@ Window {
         width: item4.width
         height: 60
 
-        Button{
-            id: addChild
-            anchors.left: parent.left
-            width: parent.width / 2
-            height: parent.height
-            text: "Add Child"
-            font.pointSize: fontPointSize
-
-            background: Rectangle {
-                implicitWidth: 100
-                implicitHeight: 40
-                opacity: enabled ? 1 : 0.3
-                color: addChild.down ? "#d0d0d0" : "#e0e0e0"
-                border.color: "black"
-                border.width: borderWidth
-            }
-
-            onClicked:
-            {
-                console.log(text)
-            }
+        onClickedChild: {
+            console.log("add child")
         }
 
-
-        Button{
-            id: chSibl
-            anchors.right: parent.right
-            width: parent.width / 2
-            height: parent.height
-            text: "Add Siblings"
-            font.pointSize: fontPointSize
-
-            background: Rectangle {
-                implicitWidth: 100
-                implicitHeight: 40
-                opacity: enabled ? 1 : 0.3
-                color: chSibl.down ? "#d0d0d0" : "#e0e0e0"
-                border.color: "black"
-                border.width: borderWidth
-            }
-
-            onClicked:
-            {
-                console.log(text)
-            }
+        onClickedSibling: {
+            console.log("add sibling")
         }
-
     }
 }
 
