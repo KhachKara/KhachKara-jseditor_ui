@@ -22,82 +22,14 @@ Window {
     property int space: 10
 
     // строка меню
-    Item {
-        id: item1
-        width: root.width
-        height: rowMenu.height
+    MenuBlock{
 
-        Row{
-            spacing: space
-            id: rowMenu
-
-            leftPadding: space
-            topPadding: space
-
-            Repeater{
-                model: menuItems.length
-                Rectangle{
-                    width: menuTxt.width
-                    height: menuTxt.height
-                    border.width: borderWidth
-                    border.color: "black"
-                    Button{
-                        width: menuTxt.width  - 2 * borderWidth
-                        height: menuTxt.height - 2 * borderWidth
-                        anchors.centerIn: parent
-                        palette {
-                            button: textAreaColor
-                        }
-                        Text {
-                            id: menuTxt
-                            padding: space
-                            anchors.centerIn: parent
-                            text: menuItems[index]
-                            font.pointSize: fontPointSize
-                        }
-                        onClicked:
-                        {
-                            console.log(menuTxt.text)
-                        }
-                    }
-                }
-            }
-        }
     }
-
 
     // блок ввода jsom
-    Item {
-        id: item2
-        width: (root.width - item4.width - 4 * space) / 2
-        height: root.height - item1.height - 2 * space
-        anchors.top: item1.bottom
-        anchors.topMargin: space
-        anchors.left: item1.left
-        anchors.leftMargin: space
-        Rectangle{
-            id: item2Rect
+   JsonInput{
 
-            width: parent.width
-            height: item2.height
-            border.color: "black"
-            border.width: borderWidth
-            color: textAreaColor
-            ScrollView{
-                id: scrollView1
-                anchors.fill: parent
-                TextArea{
-                    anchors.centerIn: item2Rect
-                    focus: true
-                    placeholderText: "Json Input"
-                    width: parent.width - 2 * space
-                    height: parent.height - 2 * space
-                    text: ""
-                    font.pointSize: fontPointSize
-                }
-            }
-        }
-    }
+   }
 
     // блок вывода json
     Item {

@@ -3,13 +3,6 @@ import QtQuick.Controls 2.15
 
 Item {
     id: root
-//    anchors.left: item3.right
-//    anchors.leftMargin: space
-//    anchors.bottom: item3.bottom
-
-//    width: item4.width
-//    height: 60
-
     signal clickedChild()
     signal clickedSibling()
     Button{
@@ -31,7 +24,6 @@ Item {
 
         onClicked: {
             root.clickedChild()
-//            console.log(text)
         }
     }
 
@@ -55,7 +47,6 @@ Item {
 
         onClicked: {
             root.clickedSibling()
-//            console.log(text)
         }
     }
 }
