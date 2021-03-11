@@ -275,17 +275,19 @@ Window {
         }
     }
 
-    Item {
+
+    Image {
         id: logo
         width: item4.width
-        height: 100
+        height: 10
+
         anchors.top: item4.bottom
-        anchors.topMargin: 80
+        anchors.bottom: item5.top
         anchors.left: item4.left
-        Image {
-            id: name
-            source: "images/jsoneditor_logo.svg"
-        }
+
+        source: "images/jsoneditor_logo.svg"
+        fillMode: Image.PreserveAspectFit
+
     }
 
     // блок потомки родственники
