@@ -298,73 +298,54 @@ Window {
 
         width: item4.width
         height: 60
-        Rectangle{
-            id: item5Rect
 
-            width: item5.width
-            height: item5.height
-            border.color: "black"
-            border.width: borderWidth
-            color: "green"
-            Row{
-                width: item5.width
-                Rectangle{
-                    width: item5Rect.width / 2
-                    height: item5Rect.height
+        Button{
+            id: addChild
+            anchors.left: parent.left
+            width: parent.width / 2
+            height: parent.height
+            text: "Add Child"
+            font.pointSize: fontPointSize
 
-                    Button{
-                        id: addChild
-                        anchors.centerIn: parent
-                        width: parent.width
-                        height: parent.height
-                        text: "Add Child"
-                        font.pointSize: fontPointSize
+            background: Rectangle {
+                implicitWidth: 100
+                implicitHeight: 40
+                opacity: enabled ? 1 : 0.3
+                color: addChild.down ? "#d0d0d0" : "#e0e0e0"
+                border.color: "black"
+                border.width: borderWidth
+            }
 
-                        background: Rectangle {
-                            implicitWidth: 100
-                            implicitHeight: 40
-                            opacity: enabled ? 1 : 0.3
-                            color: addChild.down ? "#d0d0d0" : "#e0e0e0"
-                            border.color: "black"
-                            border.width: borderWidth
-                        }
-
-                        onClicked:
-                        {
-                            console.log(text)
-                        }
-                    }
-                }
-                Rectangle{
-
-                    width: parent.width / 2
-                    height: parent.height
-
-                    Button{
-                        id: chSibl
-                        anchors.centerIn: parent
-                        width: parent.width
-                        height: parent.height
-                        text: "Add Siblings"
-                        font.pointSize: fontPointSize
-
-                        background: Rectangle {
-                            implicitWidth: 100
-                            implicitHeight: 40
-                            opacity: enabled ? 1 : 0.3
-                            color: chSibl.down ? "#d0d0d0" : "#e0e0e0"
-                            border.color: "black"
-                            border.width: borderWidth
-                        }
-
-                        onClicked:
-                        {
-                            console.log(text)
-                        }
-                    }
-                }
+            onClicked:
+            {
+                console.log(text)
             }
         }
+
+
+        Button{
+            id: chSibl
+            anchors.right: parent.right
+            width: parent.width / 2
+            height: parent.height
+            text: "Add Siblings"
+            font.pointSize: fontPointSize
+
+            background: Rectangle {
+                implicitWidth: 100
+                implicitHeight: 40
+                opacity: enabled ? 1 : 0.3
+                color: chSibl.down ? "#d0d0d0" : "#e0e0e0"
+                border.color: "black"
+                border.width: borderWidth
+            }
+
+            onClicked:
+            {
+                console.log(text)
+            }
+        }
+
     }
 }
 
