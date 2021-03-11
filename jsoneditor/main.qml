@@ -7,7 +7,7 @@ import QtQuick.Layouts 1.3
 
 Window {
     id: root
-    property string projectName: "JsonEditor"
+    property string projectName: "Json Editor"
     property int fontPointSize: 12
     property string textAreaColor: "#e9e9e9"
     property variant validTypes: ["int", "string", "double", "bool", "undefined"]
@@ -25,7 +25,7 @@ Window {
     // строка меню
     Item {
         id: item1
-        width: root.width / 2
+        width: root.width
         height: rowMenu.height
 
         Row{
@@ -65,6 +65,7 @@ Window {
             }
         }
     }
+
 
     // блок ввода jsom
     Item {
@@ -279,13 +280,11 @@ Window {
         width: item4.width
         height: 100
         anchors.top: item4.bottom
-        anchors.topMargin: 100
+        anchors.topMargin: 80
         anchors.left: item4.left
-        anchors.leftMargin: width / 4
         Image {
             id: name
             source: "images/jsoneditor_logo.svg"
-            scale: 2
         }
     }
 
@@ -315,11 +314,20 @@ Window {
                     border.color: "black"
                     border.width: borderWidth
                     Button{
+                        id: addChild
                         anchors.centerIn: parent
                         width: parent.width - 2 * borderWidth
                         height: parent.height - 2 * borderWidth
                         text: "Add Child"
                         font.pointSize: fontPointSize
+
+                        background: Rectangle {
+                            implicitWidth: 100
+                            implicitHeight: 40
+                            opacity: enabled ? 1 : 0.3
+                            color: addChild.down ? "#d0d0d0" : "#e0e0e0"
+                        }
+
                         onClicked:
                         {
                             console.log(text)
@@ -327,16 +335,26 @@ Window {
                     }
                 }
                 Rectangle{
+
                     width: parent.width / 2
                     height: parent.height
                     border.color: "black"
                     border.width: borderWidth
                     Button{
+                        id: chSimb
                         anchors.centerIn: parent
                         width: parent.width - 2 * borderWidth
                         height: parent.height - 2 * borderWidth
                         text: "Add Sibblings"
                         font.pointSize: fontPointSize
+
+                        background: Rectangle {
+                            implicitWidth: 100
+                            implicitHeight: 40
+                            opacity: enabled ? 1 : 0.3
+                            color: chSimb.down ? "#d0d0d0" : "#e0e0e0"
+                        }
+
                         onClicked:
                         {
                             console.log(text)
