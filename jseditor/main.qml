@@ -36,7 +36,6 @@ Window {
             id: scrollView1
             anchors.fill: parent
             TextArea{
-                anchors.centerIn: item2
                 focus: true
                 placeholderText: "Json Input"
                 width: parent.width - 2 * space
@@ -59,7 +58,6 @@ Window {
             id: scrollView2
             anchors.fill: parent
             TextArea{
-                anchors.centerIn: item3
                 focus: true
                 placeholderText: "Json Output"
                 width: parent.width - 2 * space
