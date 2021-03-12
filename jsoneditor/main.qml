@@ -9,7 +9,8 @@ Window {
     id: root
     property string projectName: "Json Editor"
     property int fontPointSize: 12
-    property string textAreaColor: "#e9e9e9"
+    property int borderWidth: 1
+    property int space: 10
 
     width: 1000
     height: 600
@@ -17,207 +18,81 @@ Window {
     visible: true
     title: qsTr(projectName)
 
-    property variant menuItems: ["Open", "Save", "Close", "Auto", "Synchronise"]
-    property int borderWidth: 1
-    property int space: 10
-
     // строка меню
     MenuBlock{
-
+        id: item1
     }
 
     // блок ввода jsom
-   JsonInput{
+    JsonInputOutput{
+        id: item2
+        anchors.top: item1.bottom
+        anchors.topMargin: space
+        anchors.left: item1.left
+        anchors.leftMargin: space
 
-   }
+        ScrollView{
+            id: scrollView1
+            anchors.fill: parent
+            TextArea{
+                anchors.centerIn: item2Rect
+                focus: true
+                placeholderText: "Json Input"
+                width: parent.width - 2 * space
+                height: parent.height - 2 * space
+                text: ""
+                font.pointSize: fontPointSize
+            }
+        }
+    }
 
     // блок вывода json
-    Item {
+    JsonInputOutput {
         id: item3
-        width: item2.width
-        height: item2.height
 
         anchors.top: item2.top
         anchors.left: item2.right
         anchors.leftMargin: space
 
-        Rectangle{
-            id: item3Rect
-            width: item2.width
-            height: parent.height
-            border.color: "black"
-            border.width: borderWidth
-            color: textAreaColor
-            ScrollView{
-                id: scrollView2
-                anchors.fill: parent
-                TextArea{
-                    anchors.centerIn: item2Rect
-                    focus: true
-                    placeholderText: "Json Output"
-                    width: parent.width - 2 * space
-                    height: parent.height - 2 * space
-                    text: ""
-                    font.pointSize: fontPointSize
-                }
+        ScrollView{
+            id: scrollView2
+            anchors.fill: parent
+            TextArea{
+                anchors.centerIn: item2Rect
+                focus: true
+                placeholderText: "Json Output"
+                width: parent.width - 2 * space
+                height: parent.height - 2 * space
+                text: ""
+                font.pointSize: fontPointSize
             }
         }
     }
 
     // блок управления
-    Item {
-        id: item4
-        width: 250
-        height: 180
 
+    ManagmentBlock{
+        id: item4
         anchors.top: item3.top
         anchors.left: item3.right
         anchors.leftMargin: space
-
-        Rectangle{
-            id: item4Rect
-
-            width: item4.width
-            height: item4.height
-            color: root.color
-            Column{
-                spacing: - borderWidth
-                Row{
-                    id: row1
-                    Rectangle{
-                        id: keyRect
-                        width: item4Rect.width / 3
-                        height: item4Rect.height / 3
-                        border.color: "black"
-                        border.width: borderWidth
-                        color: textAreaColor
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: space
-                            id: keyText
-                            text: qsTr("Key")
-                            font.pointSize: fontPointSize
-                        }
-                    }
-                    Rectangle{
-                        width: item4Rect.width - keyRect.width
-                        height: item4Rect.height / 3
-                        border.color: "black"
-                        border.width: borderWidth
-                        color: textAreaColor
-                        TextField{
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: space
-                            width: parent.width - 2 * space
-                            height: parent.height
-                            text: ""
-                            font.pointSize: fontPointSize
-                            focus: true
-                            background: textAreaColor
-                        }
-                    }
-                }
-                Row{
-                    id: row2
-                    Rectangle{
-                        id: typeRect
-                        width: item4Rect.width / 3
-                        height: item4Rect.height / 3
-                        border.color: "black"
-                        border.width: borderWidth
-                        color: textAreaColor
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: space
-                            id: typeText
-                            text: qsTr("Type")
-                            font.pointSize: fontPointSize
-                        }
-                    }
-                    Rectangle{
-                        width: item4Rect.width - typeRect.width
-                        height: item4Rect.height / 3
-                        border.color: "black"
-                        border.width: borderWidth
-                        color: textAreaColor
-                        ComboBox {
-                            id: combo
-                            anchors.centerIn: parent
-                            width: parent.width - 2 * borderWidth
-                            height: parent.height - 2 * borderWidth
-                            editable: false
-                            font.pointSize: fontPointSize
-                            model: ListModel {
-                                id: model
-                                ListElement { text: "int" }
-                                ListElement { text: "double" }
-                                ListElement { text: "string" }
-                                ListElement { text: "bool" }
-                                ListElement { text: "undefined" }
-                            }
-                            onAccepted: {
-                                if (find(editText) === -1)
-                                    model.append({text: editText})
-                            }
-                        }
-                    }
-                }
-                Row{
-                    id: row3
-                    Rectangle{
-                        id: valueRect
-                        width: item4Rect.width / 3
-                        height: item4Rect.height / 3
-                        border.color: "black"
-                        border.width: borderWidth
-                        color: textAreaColor
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: space
-                            id: valueText
-                            text: qsTr("Value")
-                            font.pointSize: fontPointSize
-                        }
-                    }
-                    Rectangle{
-                        width: item4Rect.width - valueRect.width
-                        height: item4Rect.height / 3
-                        border.color: "black"
-                        border.width: borderWidth
-                        color: textAreaColor
-                        TextField{
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: space
-                            width: parent.width - 2 * space
-                            height: parent.height
-                            text: ""
-                            font.pointSize: fontPointSize
-                            focus: true
-                            background: textAreaColor
-                        }
-                    }
-                }
-            }
-        }
     }
 
-    Item {
-        id: logo
-        width: item4.width
-        height: 100
-        anchors.top: item4.bottom
-        anchors.topMargin: 80
-        anchors.left: item4.left
-        Image {
-            id: name
-            source: "images/jsoneditor_logo.svg"
-        }
-    }
+
+    // логотип
+    Image {
+           id: logo
+           width: item4.width
+           height: 10
+
+           anchors.top: item4.bottom
+           anchors.bottom: item5.top
+           anchors.left: item4.left
+
+           source: "images/jsoneditor_logo.svg"
+           fillMode: Image.PreserveAspectFit
+
+       }
 
     // блок потомки родственники
     ButtonBlock {
