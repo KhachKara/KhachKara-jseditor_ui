@@ -49,7 +49,6 @@ Item {
                         focus: true
                         background: Rectangle {
                             anchors.centerIn: parent
-                            width: parent.width - 2 * borderWidth
                             height: parent.height - 2 * borderWidth
                             color: textAreaColor
                         }
@@ -137,7 +136,6 @@ Item {
                         focus: true
                         background: Rectangle {
                             anchors.centerIn: parent
-                            width: parent.width - 2 * borderWidth
                             height: parent.height - 2 * borderWidth
                             color: textAreaColor
                         }
