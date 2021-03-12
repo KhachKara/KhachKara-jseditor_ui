@@ -11,6 +11,7 @@ Window {
     property int fontPointSize: 12
     property int borderWidth: 1
     property int space: 10
+    property string textAreaColor: "#e9e9e9"
 
     width: 1000
     height: 600
@@ -35,7 +36,7 @@ Window {
             id: scrollView1
             anchors.fill: parent
             TextArea{
-                anchors.centerIn: item2Rect
+                anchors.centerIn: item2
                 focus: true
                 placeholderText: "Json Input"
                 width: parent.width - 2 * space
@@ -58,7 +59,7 @@ Window {
             id: scrollView2
             anchors.fill: parent
             TextArea{
-                anchors.centerIn: item2Rect
+                anchors.centerIn: item3
                 focus: true
                 placeholderText: "Json Output"
                 width: parent.width - 2 * space
@@ -81,18 +82,18 @@ Window {
 
     // логотип
     Image {
-           id: logo
-           width: item4.width
-           height: 10
+        id: logo
+        width: item4.width
+        height: 10
 
-           anchors.top: item4.bottom
-           anchors.bottom: item5.top
-           anchors.left: item4.left
+        anchors.top: item4.bottom
+        anchors.bottom: item5.top
+        anchors.left: item4.left
 
-           source: "images/jsoneditor_logo.svg"
-           fillMode: Image.PreserveAspectFit
+        source: "images/jsoneditor_logo.svg"
+        fillMode: Image.PreserveAspectFit
 
-       }
+    }
 
     // блок потомки родственники
     ButtonBlock {
