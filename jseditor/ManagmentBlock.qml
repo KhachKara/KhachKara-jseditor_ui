@@ -82,14 +82,7 @@ Item {
                 focus: true
                 editable: false
                 font.pointSize: fontPointSize
-                model: ListModel {
-                    id: model
-                    ListElement { text: "int" }
-                    ListElement { text: "double" }
-                    ListElement { text: "string" }
-                    ListElement { text: "bool" }
-                    ListElement { text: "undefined" }
-                }
+                model: [ "int", "double", "string", "bool", "undefined" ]
                 background: Rectangle {
                     border.color: tableBorderColor
                     border.width: tableBorderWidth
