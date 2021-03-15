@@ -97,6 +97,7 @@ Window {
         anchors.bottom: item5.top
         anchors.left: item4.left
         anchors.right: parent.right
+        anchors.margins: space
 
         source: "images/jsoneditor_logo.svg"
         fillMode: Image.PreserveAspectFit
