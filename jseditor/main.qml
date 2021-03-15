@@ -116,6 +116,8 @@ Window {
 
         width: item4.width
         height: 60
+        tableBorderWidth: 1
+        tableBorderColor: borderColor
 
         onClickedChild: {
             console.log("add child")
