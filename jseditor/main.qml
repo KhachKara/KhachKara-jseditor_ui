@@ -10,8 +10,10 @@ Window {
     property string projectName: "Json Editor"
     property int fontPointSize: 12
     property int borderWidth: 1
+    property string borderColor: "black"
     property int space: 10
     property string textAreaColor: "#e9e9e9"
+//    property string textAreaColor: "yellow"
 
     width: 1000
     height: 600
@@ -26,52 +28,48 @@ Window {
         leftPadding: space
         topPadding: space
         btnBorderWidth: root.borderWidth
-        btnBorderColor: "black"
+        btnBorderColor: borderColor
         onMenuClicked: {
             console.log("menuClicked: " + text)
         }
     }
 
-    // блок ввода jsom
-    JsonInputOutput{
-        id: item2
+    Item {
+        id: row
+        anchors.left: parent.left
+        anchors.right: item4.left
         anchors.top: item1.bottom
-        anchors.topMargin: space
-        anchors.left: item1.left
-        anchors.leftMargin: space
+        anchors.bottom: parent.bottom
+        Component.onCompleted: {
+            console.log(row.width)
+            console.log(row.height)
+        }
 
-        ScrollView{
-            id: scrollView1
-            anchors.fill: parent
-            TextArea{
-                focus: true
-                placeholderText: "Json Input"
-                width: parent.width - 2 * space
-                height: parent.height - 2 * space
-                text: ""
-                font.pointSize: fontPointSize
+        // блок ввода jsom
+        JsonInputOutput{
+            id: item2
+            anchors.left: parent.left
+            anchors.right: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: space
+            border {
+                width: borderWidth
+                color: borderColor
             }
         }
-    }
 
-    // блок вывода json
-    JsonInputOutput {
-        id: item3
-
-        anchors.top: item2.top
-        anchors.left: item2.right
-        anchors.leftMargin: space
-
-        ScrollView{
-            id: scrollView2
-            anchors.fill: parent
-            TextArea{
-                focus: true
-                placeholderText: "Json Output"
-                width: parent.width - 2 * space
-                height: parent.height - 2 * space
-                text: ""
-                font.pointSize: fontPointSize
+        // блок вывода json
+        JsonInputOutput {
+            id: item3
+            anchors.left: parent.horizontalCenter
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: space
+            border {
+                width: borderWidth
+                color: borderColor
             }
         }
     }
@@ -80,21 +78,20 @@ Window {
 
     ManagmentBlock{
         id: item4
-        anchors.top: item3.top
-        anchors.left: item3.right
-        anchors.leftMargin: space
+        anchors.top: item1.bottom
+        anchors.right: parent.right
+        anchors.margins: space
     }
 
 
     // логотип
     Image {
         id: logo
-        width: item4.width
-        height: 10
 
         anchors.top: item4.bottom
         anchors.bottom: item5.top
         anchors.left: item4.left
+        anchors.right: parent.right
 
         source: "images/jsoneditor_logo.svg"
         fillMode: Image.PreserveAspectFit
@@ -105,9 +102,11 @@ Window {
     ButtonBlock {
         id: item5
 
-        anchors.left: item3.right
-        anchors.leftMargin: space
-        anchors.bottom: item3.bottom
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: space
+        }
 
         width: item4.width
         height: 60
