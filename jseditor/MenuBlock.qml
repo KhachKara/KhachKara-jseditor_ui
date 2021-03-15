@@ -16,29 +16,29 @@ Item {
 
         Repeater{
             model: menuItems.length
-            Rectangle{
-                width: menuTxt.width
-                height: menuTxt.height
-                border.width: borderWidth
-                border.color: "black"
-                Button{
-                    width: menuTxt.width  - 2 * borderWidth
-                    height: menuTxt.height - 2 * borderWidth
+            Button{
+                id: control
+                background: Rectangle{
+                    implicitWidth: menuTxt.width
+                    implicitHeight: menuTxt.height
+                    border.width: borderWidth
+                    border.color: "black"
+                    color: control.down ? "#d0d0d0" : "#e0e0e0"
+                }
+
+                palette {
+                    button: textAreaColor
+                }
+                Text {
+                    id: menuTxt
+                    padding: space
                     anchors.centerIn: parent
-                    palette {
-                        button: textAreaColor
-                    }
-                    Text {
-                        id: menuTxt
-                        padding: space
-                        anchors.centerIn: parent
-                        text: menuItems[index]
-                        font.pointSize: fontPointSize
-                    }
-                    onClicked:
-                    {
-                        console.log(menuTxt.text)
-                    }
+                    text: menuItems[index]
+                    font.pointSize: fontPointSize
+                }
+                onClicked:
+                {
+                    console.log(menuTxt.text)
                 }
             }
         }
