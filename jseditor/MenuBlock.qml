@@ -5,8 +5,8 @@ Row{
     id: rowMenu
 
     property variant menuItems: ["Open", "Save", "Close", "Auto", "Synchronise"]
-    property int borderWidth: 2
-    property string borderColor: "blue"
+    property int btnBorderWidth: 2
+    property string btnBorderColor: "blue"
     signal menuClicked(string text)
     signal menuIndClicked(int index)
 
@@ -15,8 +15,8 @@ Row{
         Button{
             id: control
             background: Rectangle{
-                border.width: borderWidth
-                border.color: borderColor
+                border.width: btnBorderWidth
+                border.color: btnBorderColor
                 color: control.down ? "#d0d0d0" : "#e0e0e0"
             }
             contentItem:  Text {

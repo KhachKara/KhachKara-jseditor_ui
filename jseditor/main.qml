@@ -25,8 +25,8 @@ Window {
         spacing: space
         leftPadding: space
         topPadding: space
-        borderWidth: root.borderWidth
-        borderColor: "black"
+        btnBorderWidth: root.borderWidth
+        btnBorderColor: "black"
         onMenuClicked: {
             console.log("menuClicked: " + text)
         }
