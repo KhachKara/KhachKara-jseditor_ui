@@ -22,6 +22,14 @@ Window {
     // строка меню
     MenuBlock{
         id: item1
+        spacing: space
+        leftPadding: space
+        topPadding: space
+        borderWidth: root.borderWidth
+        borderColor: "black"
+        onMenuClicked: {
+            console.log("menuClicked: " + text)
+        }
     }
 
     // блок ввода jsom
