@@ -81,6 +81,11 @@ Window {
         anchors.top: item1.bottom
         anchors.right: parent.right
         anchors.margins: space
+
+        tableBorderWidth: borderWidth
+        tableBorderColor: borderColor
+        columnWidthFirst: 80
+        rowHeight: 60
     }
 
 

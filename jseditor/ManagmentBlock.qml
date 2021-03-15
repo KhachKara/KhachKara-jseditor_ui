@@ -1,145 +1,136 @@
-import QtQuick 2.9
+import QtQuick 2.12
 import QtQuick.Controls 2.15
 
 Item {
-    width: 250
-    height: 180
+    id: item4Rect
 
+    width: columnWidthFirst + columnWidthSecond
+    height: column.children.length * rowHeight
+    property int tableBorderWidth: 2
+    property string tableBorderColor: "yellow"
+    property int columnWidthFirst: 60
+    property int columnWidthSecond: 2 * columnWidthFirst
+    property int rowHeight: 40
 
-    Rectangle{
-        id: item4Rect
-
-        width: item4.width
-        height: item4.height
-        color: root.color
-        Column{
-            spacing: - borderWidth
-            Row{
-                id: row1
-                Rectangle{
-                    id: keyRect
-                    width: item4Rect.width / 3
-                    height: item4Rect.height / 3
-                    border.color: "black"
-                    border.width: borderWidth
-                    color: textAreaColor
-                    Text {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: space
-                        id: keyText
-                        text: qsTr("Key")
-                        font.pointSize: fontPointSize
-                    }
+    Column {
+        id: column
+        spacing: -tableBorderWidth
+        Row {
+            id: row1
+            spacing: -tableBorderWidth
+            Rectangle {
+                id: keyRect
+                width: columnWidthFirst
+                height: rowHeight
+                border.color: tableBorderColor
+                border.width: tableBorderWidth
+                color: textAreaColor
+                Text {
+                    anchors.fill: parent
+                    anchors.margins: space
+                    verticalAlignment: Text.AlignVCenter
+                    id: keyText
+                    text: qsTr("Key")
+                    font.pointSize: fontPointSize
                 }
-                Rectangle{
-                    width: item4Rect.width - keyRect.width
-                    height: item4Rect.height / 3
-                    border.color: "black"
-                    border.width: borderWidth
-                    color: textAreaColor
-                    TextField{
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: space
-                        width: parent.width - 2 * space
-                        height: parent.height
-                        text: ""
-                        font.pointSize: fontPointSize
-                        focus: true
-                        background: Rectangle {
-                            anchors.centerIn: parent
-                            height: parent.height - 2 * borderWidth
-                            color: textAreaColor
-                        }
-                    }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: { tfKey.focus = true }
                 }
             }
-            Row{
-                id: row2
-                Rectangle{
-                    id: typeRect
-                    width: item4Rect.width / 3
-                    height: item4Rect.height / 3
-                    border.color: "black"
-                    border.width: borderWidth
+            TextField {
+                id: tfKey
+                width: columnWidthSecond
+                height: rowHeight
+
+                font.pointSize: fontPointSize
+                focus: true
+                background: Rectangle {
+                    border.color: tableBorderColor
+                    border.width: tableBorderWidth
                     color: textAreaColor
-                    Text {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: space
-                        id: typeText
-                        text: qsTr("Type")
-                        font.pointSize: fontPointSize
-                    }
-                }
-                Rectangle{
-                    width: item4Rect.width - typeRect.width
-                    height: item4Rect.height / 3
-                    border.color: "black"
-                    border.width: borderWidth
-                    color: textAreaColor
-                    ComboBox {
-                        id: combo
-                        anchors.centerIn: parent
-                        width: parent.width - 2 * borderWidth
-                        height: parent.height - 2 * borderWidth
-                        editable: false
-                        font.pointSize: fontPointSize
-                        model: ListModel {
-                            id: model
-                            ListElement { text: "int" }
-                            ListElement { text: "double" }
-                            ListElement { text: "string" }
-                            ListElement { text: "bool" }
-                            ListElement { text: "undefined" }
-                        }
-                        onAccepted: {
-                            if (find(editText) === -1)
-                                model.append({text: editText})
-                        }
-                    }
                 }
             }
-            Row{
-                id: row3
-                Rectangle{
-                    id: valueRect
-                    width: item4Rect.width / 3
-                    height: item4Rect.height / 3
-                    border.color: "black"
-                    border.width: borderWidth
-                    color: textAreaColor
-                    Text {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: space
-                        id: valueText
-                        text: qsTr("Value")
-                        font.pointSize: fontPointSize
-                    }
+        }
+        Row {
+            id: row2
+            spacing: -tableBorderWidth
+            Rectangle {
+                id: typeRect
+                width: columnWidthFirst
+                height: rowHeight
+                border.color: tableBorderColor
+                border.width: tableBorderWidth
+                color: textAreaColor
+                Text {
+                    anchors.fill: parent
+                    anchors.margins: space
+                    verticalAlignment: Text.AlignVCenter
+                    text: qsTr("Type")
+                    font.pointSize: fontPointSize
                 }
-                Rectangle{
-                    width: item4Rect.width - valueRect.width
-                    height: item4Rect.height / 3
-                    border.color: "black"
-                    border.width: borderWidth
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: { combo.popup.open() }
+                }
+            }
+            ComboBox {
+                id: combo
+
+                width: columnWidthSecond
+                height: rowHeight
+                focus: true
+                editable: false
+                font.pointSize: fontPointSize
+                model: ListModel {
+                    id: model
+                    ListElement { text: "int" }
+                    ListElement { text: "double" }
+                    ListElement { text: "string" }
+                    ListElement { text: "bool" }
+                    ListElement { text: "undefined" }
+                }
+                background: Rectangle {
+                    border.color: tableBorderColor
+                    border.width: tableBorderWidth
                     color: textAreaColor
-                    TextField{
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: space
-                        width: parent.width - 2 * space
-                        height: parent.height
-                        text: ""
-                        font.pointSize: fontPointSize
-                        focus: true
-                        background: Rectangle {
-                            anchors.centerIn: parent
-                            height: parent.height - 2 * borderWidth
-                            color: textAreaColor
-                        }
-                    }
+                }
+            }
+        }
+        Row {
+            id: row3
+            spacing: -tableBorderWidth
+            Rectangle {
+                id: valueRect
+                width: columnWidthFirst
+                height: rowHeight
+                border.color: tableBorderColor
+                border.width: tableBorderWidth
+                color: textAreaColor
+                Text {
+                    anchors.fill: parent
+                    anchors.margins: space
+                    verticalAlignment: Text.AlignVCenter
+                    id: valueText
+                    text: qsTr("Value")
+                    font.pointSize: fontPointSize
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: { tfValue.focus = true }
+                }
+            }
+            TextField {
+                id: tfValue
+                width: columnWidthSecond
+                height: rowHeight
+
+                font.pointSize: fontPointSize
+                focus: true
+                background: Rectangle {
+                    border.color: tableBorderColor
+                    border.width: tableBorderWidth
+                    color: textAreaColor
                 }
             }
         }
