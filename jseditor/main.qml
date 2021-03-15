@@ -22,7 +22,7 @@ Window {
     title: qsTr(projectName)
 
     // строка меню
-    MenuBlock{
+    MenuBlock {
         id: item1
         spacing: space
         leftPadding: space
@@ -46,7 +46,7 @@ Window {
         }
 
         // блок ввода jsom
-        JsonInputOutput{
+        JsonInputOutput {
             id: item2
             anchors.left: parent.left
             anchors.right: parent.horizontalCenter
@@ -67,6 +67,7 @@ Window {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.margins: space
+            anchors.leftMargin: 0
             border {
                 width: borderWidth
                 color: borderColor
@@ -76,7 +77,7 @@ Window {
 
     // блок управления
 
-    ManagmentBlock{
+    ManagmentBlock {
         id: item4
         anchors.top: item1.bottom
         anchors.right: parent.right
