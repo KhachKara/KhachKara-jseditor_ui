@@ -13,10 +13,11 @@ Window {
     property string borderColor: "black"
     property int space: 10
     property string textAreaColor: "#e9e9e9"
-//    property string textAreaColor: "yellow"
 
     width: 1000
+    minimumWidth: 480
     height: 600
+    minimumHeight: 300
     color: "#d9d9d9"
     visible: true
     title: qsTr(projectName)
@@ -76,7 +77,6 @@ Window {
     }
 
     // блок управления
-
     ManagmentBlock {
         id: item4
         anchors.top: item1.bottom
